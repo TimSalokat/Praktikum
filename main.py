@@ -47,7 +47,6 @@ async def add_item(new_item: NewItem):
 
     shopping_list[len(shopping_list)] = new_item.dict()
     return {"msg": f"{new_item.name} was added"}
-    # return shopping_list[len(shopping_list) - 1]
 
 
 if __name__ == "__main__":
