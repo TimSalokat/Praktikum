@@ -80,4 +80,4 @@ async def delete_item(name: str):
 
 
 if __name__ == "__main__":
-    pass
+    print("Hello world")
