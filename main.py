@@ -42,7 +42,7 @@ async def get_index_by_name(name: str):
 @app.get("/get-by-name")
 async def get_by_name(name: str):
     item = await get_index_by_name(name)
-    return {"msg": f"{shopping_list[item]}"}
+    return shopping_list[item]
 
 
 @app.get("/get-full-list")
@@ -74,7 +74,7 @@ async def update_item(name: str, item_changes: NewItem):
 @app.delete("/delete-item")
 async def delete_item(name: str):
     del shopping_list[await get_index_by_name(name)]
-    return {"msg", f"Deleted {name} from your list"}
+    return f"Deleted {name} from your list"
 
 
 if __name__ == "__main__":
