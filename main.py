@@ -26,12 +26,23 @@ async def get_by_index(item_index: int):
     return shopping_list[item_index]
 
 
-@app.get("/get-by-name")
-async def get_by_name(name: str):
+async def get_index_by_name(name: str):
+    item_index = None
     for item in shopping_list:
         if shopping_list[item]["name"] == name:
-            return shopping_list[item]
-    raise HTTPException(status_code=404, detail=f"{name} not found")
+            item_index = item
+            break
+
+    if item_index == None:
+        raise HTTPException(status_code=404, detail=f"{name} not found")
+    else:
+        return item_index
+
+
+@app.get("/get-by-name")
+async def get_by_name(name: str):
+    item = await get_index_by_name(name)
+    return {"msg": f"{shopping_list[item]}"}
 
 
 @app.get("/get-full-list")
@@ -47,6 +58,23 @@ async def add_item(new_item: NewItem):
 
     shopping_list[len(shopping_list)] = new_item.dict()
     return {"msg": f"{new_item.name} was added"}
+
+
+@app.put("/update-item")
+async def update_item(name: str, item_changes: NewItem):
+    item_to_change = shopping_list[await get_index_by_name(name)]
+    if item_changes.name != None:
+        item_to_change["name"] = item_changes.name
+    if item_changes.quantity != None:
+        item_to_change["quantity"] = item_changes.quantity
+
+    return {"msg": f"{item_to_change} changed"}
+
+
+@app.delete("/delete-item")
+async def delete_item(name: str):
+    del shopping_list[await get_index_by_name(name)]
+    return {"msg", f"Deleted {name} from your list"}
 
 
 if __name__ == "__main__":
