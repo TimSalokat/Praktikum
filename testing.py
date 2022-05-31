@@ -1,6 +1,6 @@
 # pytest testing.py -vv -x
 # -vv shows extended information
-# -x makes it stop as soon as one test failes
+# -x makes it stop as soon as one test fails
 
 from fastapi.testclient import TestClient
 

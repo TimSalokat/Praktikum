@@ -1,4 +1,6 @@
 # uvicorn main:app --reload
+# docker run -it ubuntu
+# docker image is in the virtual enviroment
 
 from __future__ import annotations
 from unicodedata import name
