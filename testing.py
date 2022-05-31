@@ -47,4 +47,4 @@ def test_item_change():
 def test_item_delete():
     response = client.delete("/delete-item?name=Tomatoes")
     assert response.status_code == 200
-    assert response.json() == "Deleted Tomatoes fro your list"
+    assert response.json() == "Deleted Tomatoes from your list"
